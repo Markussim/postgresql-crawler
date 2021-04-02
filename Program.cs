@@ -6,7 +6,7 @@ namespace EFGetStarted
 {
     public class BloggingContext : DbContext
     {
-        public DbSet<Persons4> people { get; set; }
+        public DbSet<people> customers_orders2 { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseNpgsql("Host=localhost;Database=my_ver_nice_db;Username=postgres;Password=1");
@@ -19,25 +19,28 @@ namespace EFGetStarted
 
                 // Create
                 Console.WriteLine("Inserting a new blog");
-                db.Add(new Persons4 { personID = 12 });
+                db.Add(new people { customer_id = 12 });
                 db.SaveChanges();
 
                 // Read
                 Console.WriteLine("Querying for a blog");
-                var blog = db.people;
+                var blog = db.customers_orders2;
+                db.SaveChanges();
 
-                Console.WriteLine(blog);
+
+                Console.WriteLine(blog.Find(1).customer_id);
+
                 db.SaveChanges();
             }
         }
 
     }
 
-    public class Persons4
+    public class people
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        public int personID { get; set; }
+        public int customer_id { get; set; }
     }
 
 
